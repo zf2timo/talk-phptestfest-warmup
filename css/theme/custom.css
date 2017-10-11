@@ -5,8 +5,8 @@
     font-size: 0.8em;
 }
 
-.reveal .footer i {
-    color: #48AAE6;
+.fa.fa-twitter {
+    color: #48AAE6
 }
 
 .reveal .footer span {

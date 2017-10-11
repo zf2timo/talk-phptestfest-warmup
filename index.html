@@ -1,54 +1,202 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>PHPTestFest Warm up</title>
+    <title>PHPTestFest Warm up</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/white.css">
-		<link rel="stylesheet" href="css/theme/custom.css">
-		<link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+    <link rel="stylesheet" href="css/theme/custom.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-			<div class="footer">
-				<i class="fa fa-twitter" aria-hidden="true"></i><span>@zf2timo</span>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Who am I</h1>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+            <p>Timo Tewes</p>
+            <p><i class="fa fa-twitter"></i><i class="fa fa-github"></i> @zf2timo</p>
+        </section>
+        <section>
+            <h1>What should be tested</h1>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+            <ul>
+                <li>Nothing deprecated</li>
+                <li>PHP Core functionality</li>
+                <li>PHP extensions</li>
+            </ul>
+        </section>
+        <section>
+            <h1>What should be tested</h1>
+
+            <p><a href="http://gcov.php.net/PHP_7_1/lcov_html/">GCOV code coverage report</a></p>
+            <p><img class="img-responsive" src="img/code-coverage-report.png" width="500"></p>
+        </section>
+        <section>
+            <h1>What should be tested</h1>
+
+            <p><a href="http://gcov.php.net/viewer.php?version=PHP_7_1&func=tests">GCOV failed tests</a></p>
+            <p><img class="img-responsive" src="img/test-failures.png" width="500"></p>
+        </section>
+        <section>
+            <h1>What should be tested</h1>
+
+            <p>
+                <a href="http://gcov.php.net/viewer.php?version=PHP_7_1&func=tested_functions">GCOV tested Functions</a>
+            </p>
+            <p><img class="img-responsive" src="img/tested_functions.png" width="500"></p>
+        </section>
+        <section>
+            <h1>Organizing Tests</h1>
+        </section>
+        <section>
+            <h1>Naming conventions</h1>
+
+            <ul>
+                <li>&lt;functionname&gt;_basic.phpt</li>
+                <li>&lt;functionname&gt;_variations.phpt</li>
+                <li>&lt;functionname&gt;_error.phpt</li>
+                <li>bug&lt;bugid&gt;.phpt</li>
+                <li>&lt;extname&gt;&lt;no&gt;.phpt</li>
+            </ul>
+            <p>Number suffix for duplications</p>
+        </section>
+        <section>
+            <h1>Structure of a test</h1>
+
+            <pre><code data-trim data-noescape>
+--TEST--
+strtr() function - basic test for strtr()
+--FILE--
+&lt;?php
+/* Do not change this test it is a README.TESTING example. */
+$trans = ["world" => "PHPUGMS"];
+var_dump(strtr("# Hello, world! #", $trans));
+?&gt;
+--EXPECT--
+string(19) "# Hello, PHPUGMS! #"
+                </code></pre>
+        </section>
+        <section>
+            <h1>Available sections</h1>
+
+            <ul>
+                <li>--TEST--</li>
+                <li>--DESCRIPTION--</li>
+                <li>--SKIPIF--</li>
+                <li>--HEADERS--</li>
+                <li>--FILE--</li>
+                <li>--EXPECT--</li>
+                <li>--CLEAN--</li>
+            </ul>
+
+            <p>All sections with proper description: <a href="https://qa.php.net/phpt_details.php">PHPT - Test file
+                layout</a></p>
+        </section>
+        <section>
+            <h1>--SKIPIF-- Example</h1>
+
+            <pre><code data-trim data-noescape>
+--SKIPIF--
+&lt;?php
+if (PHP_INT_SIZE != 8) {
+    die("skip this test is for 64bit platforms only");
+}
+?&gt;
+                </code></pre>
+        </section>
+        <section>
+            <h1>--EXPECTF-- Example</h1>
+
+            <pre><code data-trim data-noescape>
+--TEST--
+Testing str_shuffle.
+--FILE--
+&lt;?php
+$s = '123';
+var_dump(str_shuffle($s));
+var_dump($s);
+?&gt;
+--EXPECTF--
+string(3) "%s"
+string(3) "123"
+                </code></pre>
+        </section>
+        <section>
+            <h1>Importand Things to know</h1>
+
+            <ul>
+                <li>The output shouldn't bigger than 10 lines</li>
+                <li>Set timezone to UTC</li>
+                <li>Do not rely on directory listings</li>
+            </ul>
+        </section>
+        <section>
+            <h1>Automation FTW!</h1>
+
+            <p><i class="fa fa-github"></i>herdphp/docker-phpqa</p>
+            <p>Bash Script to install a global docker image</p>
+            <pre><code>phpqa generate -f ucfirst -b</code></pre>
+        </section>
+        <section>
+            <h1>Running the Testsuite</h1>
+        </section>
+        <section>
+            <h1>Debugging errors</h1>
+        </section>
+        <section>
+            <h1>Where to contribute</h1>
+            https://github.com/phpcommunity/phptestfest-php-src
+        </section>
+        <section>
+            <h1>Additional information</h1>
+
+            <ul>
+                <li><a href="https://phptestfest.org">PHPTestFest</a></li>
+                <li><a href="https://qa.php.net/">PHP Quality Assurance</a></li>
+            </ul>
+        </section>
+
+    </div>
+    <div class="footer">
+        <i class="fa fa-twitter" aria-hidden="true"></i><span>@zf2timo</span>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+        ]
+    });
+</script>
+</body>
 </html>
