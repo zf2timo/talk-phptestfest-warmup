@@ -1,0 +1,14 @@
+.reveal .footer {
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    font-size: 0.8em;
+}
+
+.reveal .footer i {
+    color: #48AAE6;
+}
+
+.reveal .footer span {
+    padding-left: 5px;
+}
