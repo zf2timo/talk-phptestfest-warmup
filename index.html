@@ -33,6 +33,11 @@
             <p><i class="fa fa-twitter"></i><i class="fa fa-github"></i> @zf2timo</p>
         </section>
         <section>
+            <h1>Thank you</h1>
+
+            <img src="img/wooble-brigade.jpg" width="500" class="no-border">
+        </section>
+        <section>
             <h1>What should be tested</h1>
 
             <ul>
@@ -66,7 +71,7 @@
 
             <ul>
                 <li>tests for functions belong to "ext/standard/tests"</li>
-                <li>extensions tests are in "ext/standard/&lt;module&gt;/tests</li>
+                <li>extensions tests are in "ext/standard/&lt;extension&gt;/tests"</li>
             </ul>
         </section>
         <section>
@@ -112,6 +117,18 @@ string(19) "# Hello, PHPUGMS! #"
 
             <p>All sections with proper description: <a href="https://qa.php.net/phpt_details.php">PHPT - Test file
                 layout</a></p>
+
+            <aside class="notes">
+                <ul>
+                    <li>Test: 1 Zeile</li>
+                    <li>Desc: L&auml;nge Beschreibung</li>
+                    <li>Skip: OS, 32/64Bit, CLI, ...</li>
+                    <li>Headers: Http Request Headers</li>
+                    <li>File: Der Code</li>
+                    <li>Expected: Das erwartet Ergebnis</li>
+                    <li>Clan: Aufr&auml;umen</li>
+                </ul>
+            </aside>
         </section>
         <section>
             <h1>--SKIPIF-- Example</h1>
@@ -141,32 +158,140 @@ var_dump($s);
 string(3) "%s"
 string(3) "123"
                 </code></pre>
+            <aside class="notes">
+                Not intuitive to write
+            </aside>
         </section>
         <section>
-            <h1>Importand Things to know</h1>
+            <h1>Automation FTW!</h1>
+        </section>
+        <section>
+            <h1>Automation FTW!</h1>
+
+            <p><i class="fa fa-github"></i>herdphp/docker-phpqa</p>
+        </section>
+        <section>
+            <h1>phpqa</h1>
+
+            <ul>
+                <li>Bash Script around Docker</li>
+                <li>Generates Test Templates</li>
+                <li>Runs all tests</li>
+            </ul>
+
+            <pre><code>phpqa generate ext/standard/tests -f in_array -b</code></pre>
+
+            <aside class="notes">
+                phpqa generate [PHPT_DIR]
+                -f &lt;function_name&gt; |-c &lt;class_name&gt; -m &lt;method_name&gt;
+                -b|e|v
+                [-s skipif:ini:clean:done]
+                [-k win|notwin|64b|not64b]
+                [-x ext]
+            </aside>
+        </section>
+        <section>
+            <pre><code data-trim data-noescape>--TEST--
+Test function in_array() by calling it with
+its expected arguments
+--FILE--
+&lt;?php
+echo "*** Test by calling method or function
+        with its expected arguments ***\n";
+$needle =
+$haystack =
+$strict =
+var_dump(in_array( $needle, $haystack ) );
+var_dump(in_array( $needle, $haystack, $strict ) );
+?&gt;
+--EXPECTF--</code></pre>
+        </section>
+        <section>
+            <h1>Running the Testsuite</h1>
+
+            <pre><code>$ phpqa run ext/standard/tests/in_array.phpt</code></pre>
+            <aside class="notes">
+                - Unterschiedliche versionen bsp.: 56
+            </aside>
+        </section>
+        <section>
+            <h1>ERROR!</h1>
+
+            <pre><code>FAIL Test function in_array() by calling it with its
+expected arguments [/usr/src/phpt/in_array_basic.phpt]</code></pre>
+        </section>
+        <section>
+            <h1>Debugging errors</h1>
+
+            <p>Have a look at the filesystem</p>
+
+            <aside class="notes">
+                Im Ordner der Test Datei <br>
+                Ordner mit Versions nummer bsp.: 71
+            </aside>
+        </section>
+        <section>
+            <h1>Expected vs. Actual Diff</h1>
+
+            <pre><code data-trim data-noescape>
+001+ *** Test by calling method or function with its expected arguments ***
+002+ bool(true)
+001- bool "true"
+002- bool "true"
+003+ bool(true)
+            </code></pre>
+        </section>
+        <section>
+            <h1>Logging</h1>
+
+            <pre><code data-trim data-noescape>
+
+---- EXPECTED OUTPUT
+bool "true"
+bool "true"
+---- ACTUAL OUTPUT
+*** Test by calling method or function with its expected arguments ***
+bool(true)
+bool(true)
+---- FAILED
+            </code></pre>
+        </section>
+        <section>
+            <h1>Everything what you need</h1>
+            <ul>
+                <li>in_array_basic.diff</li>
+                <li>in_array_basic.exp</li>
+                <li>in_array_basic.log</li>
+                <li>in_array_basic.out</li>
+                <li>in_array_basic.php</li>
+                <li>in_array_basic.phpt</li>
+                <li>in_array_basic.sh</li>
+            </ul>
+
+            <aside class="notes">
+                <ul>
+                    <li>.diff: Exp/Actual out diff</li>
+                    <li>.exp: Expected output</li>
+                    <li>.log: Execution output log</li>
+                    <li>.out: Actual output</li>
+                    <li>.php: your php source</li>
+                    <li>.phpt: complete test file</li>
+                    <li>.sh: sh command</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h1>Where to contribute</h1>
+            https://github.com/phpcommunity/phptestfest-php-src
+        </section>
+        <section>
+            <h1>Important Things to know</h1>
 
             <ul>
                 <li>The output shouldn't bigger than 10 lines</li>
                 <li>Set timezone to UTC</li>
                 <li>Do not rely on directory listings</li>
             </ul>
-        </section>
-        <section>
-            <h1>Automation FTW!</h1>
-
-            <p><i class="fa fa-github"></i>herdphp/docker-phpqa</p>
-            <p>Bash Script to install a global docker image</p>
-            <pre><code>phpqa generate -f ucfirst -b</code></pre>
-        </section>
-        <section>
-            <h1>Running the Testsuite</h1>
-        </section>
-        <section>
-            <h1>Debugging errors</h1>
-        </section>
-        <section>
-            <h1>Where to contribute</h1>
-            https://github.com/phpcommunity/phptestfest-php-src
         </section>
         <section>
             <h1>Additional information</h1>
