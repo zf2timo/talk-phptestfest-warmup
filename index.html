@@ -33,41 +33,75 @@
             <p><i class="fa fa-twitter"></i><i class="fa fa-github"></i> @zf2timo</p>
         </section>
         <section>
-            <h1>Thank you</h1>
+            <h1>Thanks for taking part!</h1>
 
             <img src="img/wooble-brigade.jpg" width="500" class="no-border">
+            <aside class="notes">
+                <ul>
+                    <li>Contributing</li>
+                    <li>Future proof</li>
+                    <li>49 open pull Reqests/li>
+                </ul>
+            </aside>
         </section>
         <section>
-            <h1>What should be tested</h1>
+            <h1>What to test</h1>
 
             <ul>
                 <li>Nothing deprecated</li>
                 <li>PHP Core functionality</li>
                 <li>PHP extensions</li>
             </ul>
+
+            <aside class="notes">
+                <ul>
+                    <li>mb_ereg_replace</li>
+                    <li>Basic tests, variations in parameters, edge cases and errors</li>
+                </ul>
+            </aside>
         </section>
         <section>
-            <h1>What should be tested</h1>
+            <h1>What to test</h1>
 
             <p><a href="http://gcov.php.net/PHP_7_1/lcov_html/">GCOV code coverage report</a></p>
             <p><img class="img-responsive" src="img/code-coverage-report.png" width="500"></p>
+
+            <aside class="notes">
+                <ul>
+                    <li>search for missing tests</li>
+                    <li>Line Coverage</li>
+                </ul>
+            </aside>
         </section>
         <section>
-            <h1>What should be tested</h1>
+            <h1>What to test</h1>
 
             <p><a href="http://gcov.php.net/viewer.php?version=PHP_7_1&func=tests">GCOV failed tests</a></p>
             <p><img class="img-responsive" src="img/test-failures.png" width="500"></p>
+
+            <aside class="notes">
+                <ul>
+                    <li>List of Failed test</li>
+                    <li>fix the tests</li>
+                </ul>
+            </aside>
         </section>
         <section>
-            <h1>What should be tested</h1>
+            <h1>What to test</h1>
 
             <p>
                 <a href="http://gcov.php.net/viewer.php?version=PHP_7_1&func=tested_functions">GCOV tested Functions</a>
             </p>
             <p><img class="img-responsive" src="img/tested_functions.png" width="500"></p>
+
+            <aside class="notes">
+                <ul>
+                    <li>List of completely untested functions</li>
+                </ul>
+            </aside>
         </section>
         <section>
-            <h1>Organizing Tests</h1>
+            <h1>How to organise tests</h1>
 
             <ul>
                 <li>tests for functions belong to "ext/standard/tests"</li>
@@ -87,7 +121,7 @@
             <p>Number suffix for duplications</p>
         </section>
         <section>
-            <h1>Structure of a test</h1>
+            <h1>How to structure single tests</h1>
 
             <pre><code data-trim data-noescape>
 --TEST--
@@ -101,6 +135,12 @@ var_dump(strtr("# Hello, world! #", $trans));
 --EXPECT--
 string(19) "# Hello, PHPUGMS! #"
                 </code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>Separated in sections</li>
+                    <li>minimal test</li>
+                </ul>
+            </aside>
         </section>
         <section>
             <h1>Available sections</h1>
@@ -115,7 +155,7 @@ string(19) "# Hello, PHPUGMS! #"
                 <li>--CLEAN--</li>
             </ul>
 
-            <p>All sections with proper description: <a href="https://qa.php.net/phpt_details.php">PHPT - Test file
+            <p>Overall list of sections and detailed description: <a href="https://qa.php.net/phpt_details.php">PHPT - Test file
                 layout</a></p>
 
             <aside class="notes">
@@ -141,6 +181,11 @@ if (PHP_INT_SIZE != 8) {
 }
 ?&gt;
                 </code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>Example to skip a test on a platform</li>
+                </ul>
+            </aside>
         </section>
         <section>
             <h1>--EXPECTF-- Example</h1>
@@ -159,7 +204,12 @@ string(3) "%s"
 string(3) "123"
                 </code></pre>
             <aside class="notes">
-                Not intuitive to write
+                <aside class="notes">
+                    <ul>
+                        <li>variables in output</li>
+                        <li>Not intuitive to write</li>
+                    </ul>
+                </aside>
             </aside>
         </section>
         <section>
@@ -174,12 +224,12 @@ string(3) "123"
             <h1>phpqa</h1>
 
             <ul>
-                <li>Bash Script around Docker</li>
-                <li>Generates Test Templates</li>
+                <li>Bash script around Docker</li>
+                <li>Generates test templates</li>
                 <li>Runs all tests</li>
             </ul>
 
-            <pre><code>phpqa generate ext/standard/tests -f in_array -b</code></pre>
+            <pre><code>$ phpqa generate ext/standard/tests -f in_array -b</code></pre>
 
             <aside class="notes">
                 phpqa generate [PHPT_DIR]
@@ -205,13 +255,23 @@ var_dump(in_array( $needle, $haystack ) );
 var_dump(in_array( $needle, $haystack, $strict ) );
 ?&gt;
 --EXPECTF--</code></pre>
+
+            <aside class="notes">
+                <ul>
+                    <li>Example test generated for in_array</li>
+                </ul>
+            </aside>
         </section>
         <section>
             <h1>Running the Testsuite</h1>
 
             <pre><code>$ phpqa run ext/standard/tests/in_array.phpt</code></pre>
             <aside class="notes">
-                - Unterschiedliche versionen bsp.: 56
+                <ul>
+                    <li>Execution in different versions. eg. 56</li>
+                    <li>execute test with all versions: all</li>
+                    <li>run a single file or a complete folder</li>
+                </ul>
             </aside>
         </section>
         <section>
@@ -219,6 +279,11 @@ var_dump(in_array( $needle, $haystack, $strict ) );
 
             <pre><code>FAIL Test function in_array() by calling it with its
 expected arguments [/usr/src/phpt/in_array_basic.phpt]</code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>Result from the console</li>
+                </ul>
+            </aside>
         </section>
         <section>
             <h1>Debugging errors</h1>
@@ -226,38 +291,14 @@ expected arguments [/usr/src/phpt/in_array_basic.phpt]</code></pre>
             <p>Have a look at the filesystem</p>
 
             <aside class="notes">
-                Im Ordner der Test Datei <br>
-                Ordner mit Versions nummer bsp.: 71
+                <ul>
+                    <li>New folder beside the test file</li>
+                    <li>named like the used php version. exp.: 71</li>
+                </ul>
             </aside>
         </section>
         <section>
-            <h1>Expected vs. Actual Diff</h1>
-
-            <pre><code data-trim data-noescape>
-001+ *** Test by calling method or function with its expected arguments ***
-002+ bool(true)
-001- bool "true"
-002- bool "true"
-003+ bool(true)
-            </code></pre>
-        </section>
-        <section>
-            <h1>Logging</h1>
-
-            <pre><code data-trim data-noescape>
-
----- EXPECTED OUTPUT
-bool "true"
-bool "true"
----- ACTUAL OUTPUT
-*** Test by calling method or function with its expected arguments ***
-bool(true)
-bool(true)
----- FAILED
-            </code></pre>
-        </section>
-        <section>
-            <h1>Everything what you need</h1>
+            <h1>Everything you need</h1>
             <ul>
                 <li>in_array_basic.diff</li>
                 <li>in_array_basic.exp</li>
@@ -281,8 +322,48 @@ bool(true)
             </aside>
         </section>
         <section>
+            <h1>Expected vs. Actual Diff</h1>
+            <pre><code data-trim data-noescape>
+001+ *** Test by calling method or function with its expected arguments ***
+002+ bool(true)
+001- bool "true"
+002- bool "true"
+003+ bool(true)
+            </code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>content from the in_array_basic.diff</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h1>Logging</h1>
+            <pre><code data-trim data-noescape>
+
+---- EXPECTED OUTPUT
+bool "true"
+bool "true"
+---- ACTUAL OUTPUT
+*** Test by calling method or function with its expected arguments ***
+bool(true)
+bool(true)
+---- FAILED
+            </code></pre>
+            <aside class="notes">
+                <ul>
+                    <li>Example from the in_array_basic.log</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
             <h1>Where to contribute</h1>
-            https://github.com/phpcommunity/phptestfest-php-src
+            <a href="https://github.com/phpcommunity/phptestfest-php-src">https://github.com/phpcommunity/phptestfest-php-src</a>
+
+            <aside class="notes">
+                <ul>
+                    <li>Contribute not directly to the php-src</li>
+                </ul>
+            </aside>
         </section>
         <section>
             <h1>Important Things to know</h1>
@@ -302,7 +383,13 @@ bool(true)
             </ul>
         </section>
         <section>
-            <h1>Thank you and happy testing</h1>
+            <h1>Let's do some testing!</h1>
+
+            <ul>
+                <li>22. October</li>
+                <li>DigtialHUB, Hafenweg 16, M&uuml;nster</li>
+                <li>Starting at 11 am</li>
+            </ul>
         </section>
     </div>
     <div class="footer">
