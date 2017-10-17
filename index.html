@@ -52,13 +52,6 @@
                 <li>PHP Core functionality</li>
                 <li>PHP extensions</li>
             </ul>
-
-            <aside class="notes">
-                <ul>
-                    <li>mb_ereg_replace</li>
-                    <li>Basic tests, variations in parameters, edge cases and errors</li>
-                </ul>
-            </aside>
         </section>
         <section>
             <h1>What to test</h1>
@@ -104,8 +97,8 @@
             <h1>How to organise tests</h1>
 
             <ul>
-                <li>tests for functions belong to "ext/standard/tests"</li>
-                <li>extensions tests are in "ext/standard/&lt;extension&gt;/tests"</li>
+                <li>tests for functions belong to <br> <span class="inline-code">ext/standard/tests</span></li>
+                <li>extensions tests are in <br> <span class="inline-code">ext/standard/&lt;extension&gt;/tests</span></li>
             </ul>
         </section>
         <section>
@@ -214,6 +207,10 @@ string(3) "123"
         </section>
         <section>
             <h1>Automation FTW!</h1>
+
+            <aside class="notes">
+                We are all lazy and love automating
+            </aside>
         </section>
         <section>
             <h1>Automation FTW!</h1>
@@ -228,6 +225,13 @@ string(3) "123"
                 <li>Generates test templates</li>
                 <li>Runs all tests</li>
             </ul>
+
+            <aside class="notes">
+                Executes everything in docker
+            </aside>
+        </section>
+        <section>
+            <h1>Generating Tests</h1>
 
             <pre><code>$ phpqa generate ext/standard/tests -f in_array -b</code></pre>
 

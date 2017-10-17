@@ -2,6 +2,13 @@
     font-size: 2.0em;
 }
 
+.reveal section span.inline-code {
+    background-color: #c1c1c1;
+    font-family: "Source Code Pro", "DejaVu Sans Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    padding: 0.1em 0.2em;
+    text-wrap: avoid;
+}
+
 .reveal section img.no-border {
     border: 0;
     box-shadow: none;
